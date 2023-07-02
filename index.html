@@ -1,0 +1,23 @@
+<!DOCTYPE html> <!-- #A -->
+<html> <!-- #A1 -->
+<head> <!-- #A2 -->
+    <title>EnigmedQLab</title> <!-- #A3: Title of the webpage -->
+</head> <!-- #A4 -->
+<body> <!-- #A5 -->
+    <h1>EnigmedQLab</h1> <!-- #A6: Main heading of the webpage -->
+    <form id="record-form"> <!-- #A7: Start of the form -->
+        <label for="record-note">Record Note:</label><br> <!-- #A8: Label for the record note textarea -->
+        <textarea id="record-note" name="record-note" rows="4" cols="50"></textarea><br> <!-- #A9: Textarea for the record note -->
+        <label for="focus">Focus:</label><br> <!-- #B1: Label for the focus dropdown -->
+        <select id="focus" name="focus"> <!-- #B2: Start of the focus dropdown -->
+            <option value="diagnosis">Diagnosis</option> <!-- #B3: Option for diagnosis -->
+            <option value="management">Management</option> <!-- #B4: Option for management -->
+            <option value="pathophysiology">Pathophysiology</option> <!-- #B5: Option for pathophysiology -->
+        </select><br> <!-- #B6: End of the focus dropdown -->
+        <label for="comments">Comments:</label><br> <!-- #C1: Label for the comments textarea -->
+        <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br> <!-- #C2: Textarea for the comments -->
+        <input type="submit" value="Submit"> <!-- #C3: Submit button -->
+    </form> <!-- #C4: End of the form -->
+    <div id="result"></div> <!-- #D1: Div to display the result -->
+</body> <!-- #D2 -->
+</html> <!-- #D3 -->
