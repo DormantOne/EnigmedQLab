@@ -23,3 +23,23 @@
     <div id="result"></div> <!-- #D1: Div to display the result -->
 </body> <!-- #D2 -->
 </html> <!-- #D3 -->
+
+<script>
+// #E1: Start of the script
+document.getElementById('record-form').addEventListener('submit', function(event) {
+    // #E2: Prevent the form from being submitted normally
+    event.preventDefault();
+
+    // #E3: Get the user's input from the form
+    var recordNote = document.getElementById('record-note').value;
+
+    // #E4: Create a new paragraph element to display the record note
+    var recordNoteParagraph = document.createElement('p');
+    recordNoteParagraph.textContent = recordNote;
+
+    // #E5: Insert the new paragraph at the top of the body
+    document.body.insertBefore(recordNoteParagraph, document.body.firstChild);
+});
+// #E6: End of the script
+</script>
+
