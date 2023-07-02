@@ -25,21 +25,50 @@
 </html> <!-- #D3 -->
 
 <script>
-// #E1: Start of the script
 document.getElementById('record-form').addEventListener('submit', function(event) {
-    // #E2: Prevent the form from being submitted normally
     event.preventDefault();
 
-    // #E3: Get the user's input from the form
     var recordNote = document.getElementById('record-note').value;
+    var diagnosis = document.getElementById('diagnosis').checked;
+    var management = document.getElementById('management').checked;
+    var pathophysiology = document.getElementById('pathophysiology').checked;
+    var comments = document.getElementById('comments').value;
 
-    // #E4: Create a new paragraph element to display the record note
-    var recordNoteParagraph = document.createElement('p');
-    recordNoteParagraph.textContent = recordNote;
+    var focus = (diagnosis ? 'Diagnosis ' : '') + (management ? 'Management ' : '') + (pathophysiology ? 'Pathophysiology ' : '');
 
-    // #E5: Insert the new paragraph at the top of the body
-    document.body.insertBefore(recordNoteParagraph, document.body.firstChild);
+    var data = {
+    'prompt': 'Transform the following record note into a vignette with a focus on ' + focus + ' (' + comments + '). Include multiple choice questions with a detailed discussion of pathophysiology.\n\nRecord Note: ' + recordNote,
+    'max_tokens': 30000
+    };
+
+
+fetch('https://api.openai.com/v4/engines/davinci-codex/completions', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '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'
+    },
+    body: JSON.stringify({
+        model: "gpt-4-32K",
+        messages: [
+            {role: "system", content: "You are a chief medical resident."},
+            {role: "user", content: "Transform the following record note into a vignette with a focus on " + focus + " (" + comments + "). Include multiple choice questions with a detailed discussion of pathophysiology."},
+            {role: "user", content: recordNote}
+        ],
+        max_tokens: 800
+    })
+})
+.then(response => response.json())
+.then(data => {
+    var questionParagraph = document.createElement('p');
+    questionParagraph.textContent = data.choices[0].message.content;
+    document.body.insertBefore(questionParagraph, document.body.firstChild);
+})
+.catch((error) => {
+    console.error('Error:', error);
 });
-// #E6: End of the script
+
+});
 </script>
+
 
